@@ -1,8 +1,3 @@
-# 정연재
-# python BitCoinTrade.py
-
-
-
 import time
 import pyupbit
 import datetime
