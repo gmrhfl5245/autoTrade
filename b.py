@@ -131,8 +131,8 @@ while True:
                     current_price = get_current_price("KRW-"+coin)
                     target_price = get_target_price("KRW-"+coin)
                     KC_price = get_KC_price("KRW-"+coin)
-                    dbgout(coin + ' current_price: ' + str(c_price))
-                    dbgout(coin + ' target_price: ' + str(t_price))
+                    dbgout(coin + ' current: ' + str(current_price))
+                    dbgout(coin + ' target: ' + str(target_price))
                     dbgout(coin + ' %K: ' + str(KC_price))
 
             if start_time <= now <= end_time - timedelta(seconds=10):
