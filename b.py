@@ -21,7 +21,7 @@ def post_message(token, channel, text):
 myToken = ""
 def dbgout(message):
     print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message)
-    strbuf = datetime.now().strftime('[%m/%d %H:%M:%S]') + message
+    strbuf = datetime.now().strftime('[%m/%d %H:%M:%S]') + str(message)
     post_message(myToken,"#upbit", strbuf)
 
 
