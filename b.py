@@ -104,24 +104,10 @@ def get_KC_price(ticker):
 
 
 
-
-def trade_reset():
-
-    global balance 
-    balance = get_balance("KRW")
-    dbgout('balance: '+ str(balance))
-
-    coin_list = ["ETH"]
-    for coin in coin_list:
-        current_price = get_current_price("KRW-"+coin)
-        target_price = get_target_price("KRW-"+coin)
-        KC_price = get_KC_price("KRW-"+coin)
-        dbgout(coin + ' current_price: ' + str(current_price))
-        dbgout(coin + ' target_price: ' + str(target_price))
-        dbgout(coin + ' %K: ' + str(KC_price))
-
 Start = 1
 dbgout('auto trade start')
+
+
 
 while True:
 
@@ -130,18 +116,24 @@ while True:
 
         coin_list = ["ETH"]
         for coin in coin_list:
-
             
             now = datetime.now()
             start_time = get_start_time("KRW-"+coin)
             end_time = start_time + timedelta(days=1)
-
-            if Start == 1 and start_time <= now <= end_time + timedelta(seconds=10):
-                trade_reset()
-                Start = 0
-            
-            
             coin_balance = get_balance(coin)
+
+            if Start == 1:
+                Start = 0
+                krw = get_balance("KRW")
+                dbgout('balance: '+ str( round(balance,0) ) + 'won')
+                
+                for coin in coin_list:
+                    current_price = get_current_price("KRW-"+coin)
+                    target_price = get_target_price("KRW-"+coin)
+                    KC_price = get_KC_price("KRW-"+coin)
+                    dbgout(coin + ' current_price: ' + str(c_price))
+                    dbgout(coin + ' target_price: ' + str(t_price))
+                    dbgout(coin + ' %K: ' + str(KC_price))
 
             if start_time <= now <= end_time - timedelta(seconds=10):
                 current_price = get_current_price("KRW-"+coin)
@@ -158,7 +150,7 @@ while True:
                 Start = 1
                 if coin_balance is not None:
                     upbit.sell_market_order("KRW-"+coin, coin_balance)
-                    time.sleep(1)
+                    time.sleep(10)
                     krw = get_balance("KRW")
                     dbgout("KRW-"+coin+': '+str(krw)+'won'+' sell')
                     
