@@ -125,7 +125,7 @@ while True:
             if Start == 1:
                 Start = 0
                 krw = get_balance("KRW")
-                dbgout('balance: '+ str( round(balance,0) ) + 'won')
+                dbgout('balance: '+ str( round(krw,0) ) + 'won')
                 
                 for coin in coin_list:
                     current_price = get_current_price("KRW-"+coin)
