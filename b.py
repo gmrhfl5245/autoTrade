@@ -143,7 +143,7 @@ while True:
                     
                     if coin_balance is None:
                         krw = get_balance("KRW")
-                        dbgout("KRW-"+coin+': '+str(krw)+'won'+' buy')
+                        dbgout("KRW-"+coin+': '+str(round(krw,0))+'won'+' buy')
                         upbit.buy_market_order("KRW-"+coin, krw*0.9995)
 
             else:
