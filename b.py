@@ -152,7 +152,7 @@ while True:
                     upbit.sell_market_order("KRW-"+coin, coin_balance)
                     time.sleep(10)
                     krw = get_balance("KRW")
-                    dbgout("KRW-"+coin+': '+str(krw)+'won'+' sell')
+                    dbgout("KRW-"+coin+': '+str(round(krw,0))+'won'+' sell')
                     
 
     
