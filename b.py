@@ -74,7 +74,7 @@ def get_target_price(ticker):
     df['Upper'] = df['Moving Average'] + (df['ATR'] * pb) 
     df['Lower'] = df['Moving Average'] - (df['ATR'] * pb)
     df['%B'] = ( df['pclose'] - df['Lower']) / (df['Upper'] - df['Lower'])
-    k = np.where((df.iloc[-1]['%B'] > 0.8), 0.0, 0.5)
+    k = np.where((df.iloc[-1]['%B'] > 0.8), 0.0, np.where((df.iloc[-1]['%B'] < 0.8) & (df.iloc[-1]['%B'] >= 0.0), (1.0 - df.iloc[-1]['%B']), 0.5))
     
     target_price = df.iloc[-1]['open'] + (df.iloc[-2]['high'] - df.iloc[-2]['low']) * k
 
