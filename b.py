@@ -150,9 +150,10 @@ while True:
                 Start = 1
                 if coin_balance is not None:
                     upbit.sell_market_order("KRW-"+coin, coin_balance)
-                    time.sleep(10)
+                    time.sleep(1)
                     krw = get_balance("KRW")
                     dbgout("KRW-"+coin+': '+str(round(krw,0))+'won'+' sell')
+                time.sleep(10)
                     
 
     
