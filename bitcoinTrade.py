@@ -105,8 +105,8 @@ def get_KC_price(ticker):
 
 class Thread0(threading.Thread):
     def run(self) -> None:
-        time.sleep(1)
         if Start[0] == 1:
+            time.sleep(1)
             for i in range(len(coin_list)):
                 if Start[i] == 1:
                     krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
