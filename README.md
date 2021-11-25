@@ -6,7 +6,7 @@ Ubuntu 서버 명령어
 
 경로 이동: cd 경로
 
-vim 에디터로 파일 열기: vim bitcoinAutoTrade.py
+vim 에디터로 파일 열기: vim bitcoinTrade.py
 
 vim 에디터 입력: i
 
