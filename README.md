@@ -6,7 +6,7 @@ pip3 설치: sudo apt install python3-pip
 
 서버시간 설정 : sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
-백그라운드 실행 : nohup python -u bitcoinTrade.py > output.log &
+백그라운드 실행 : nohup python3 -u bitcoinTrade.py > output.log &
 
 실시간 로그 확인 : tail -f output.log
 
