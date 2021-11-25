@@ -105,7 +105,7 @@ def get_KC_price(ticker):
 
 class Thread0(threading.Thread):
     def run(self) -> None:
-        time.sleep(0.055 * (len(coin_list) + 1) )
+        time.sleep(1)
         if Start[0] == 1:
             for i in range(len(coin_list)):
                 if Start[i] == 1:
@@ -121,7 +121,7 @@ class Thread1(threading.Thread):
     def run(self) -> None:
         while True:
             try:
-                time.sleep(0.055 * (len(coin_list) + 1) )
+                time.sleep(1)
                 now = datetime.now()
                 start_time = get_start_time("KRW-"+coin_list[0])
                 end_time = start_time + timedelta(days=1)
@@ -158,7 +158,7 @@ class Thread2(threading.Thread):
         while True:
 
             try:
-                time.sleep(0.055 * (len(coin_list) + 1) )
+                time.sleep(1)
                 now = datetime.now()
                 start_time = get_start_time("KRW-"+coin_list[1])
                 end_time = start_time + timedelta(days=1)
