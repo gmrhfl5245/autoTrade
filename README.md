@@ -26,5 +26,5 @@ pip3로 pyupbit 설치: pip3 install pyupbit
 
 디렉토리 삭제: rm -rf 디렉토리명
 
-깃허브 파일 불러오기: git clone 
+깃허브 파일 불러오기: git clone https://github.com/gmrhfl5245/autoTrade.git
 
