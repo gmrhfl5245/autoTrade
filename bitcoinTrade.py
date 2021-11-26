@@ -136,8 +136,9 @@ class Thread1(threading.Thread):
                         
                         if coin_balance is None:
                             krw[0] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[0]))
-                            dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' buy')
-                            upbit.buy_market_order("KRW-"+coin_list[0], krw[0]*0.9995)
+                            if krw[0] >= 5000 + (krw[0]*0.9995):
+                                dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' buy')
+                                upbit.buy_market_order("KRW-"+coin_list[0], krw[0]*0.9995)
 
                 else:
                     Start[0] = 1
@@ -173,8 +174,9 @@ class Thread2(threading.Thread):
                         
                         if coin_balance is None:
                             krw[1] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
-                            dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' buy')
-                            upbit.buy_market_order("KRW-"+coin_list[1], krw[1]*0.9995)
+                            if krw[1] >= 5000 + (krw[1]*0.9995):
+                                dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' buy')
+                                upbit.buy_market_order("KRW-"+coin_list[1], krw[1]*0.9995)
 
                 else:
                     Start[1] = 1
