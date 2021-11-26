@@ -108,13 +108,14 @@ class Thread0(threading.Thread):
         if Start[0] == 1:
             time.sleep(1)
             for i in range(len(coin_list)):
-                if Start[i] == 1:
-                    krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
-                    current_price = get_current_price("KRW-"+coin_list[i])
-                    target_price = get_target_price("KRW-"+coin_list[i])
-                    KC_price = get_KC_price("KRW-"+coin_list[i])
-                    dbgout('balance: '+ str( round(krw[i],0) ) + 'won' + ' / ' + coin_list[i] + ' current: ' + str(current_price) + ' / ' +  coin_list[i] + ' target: ' + str(target_price) + ' / ' + coin_list[i] + ' %K: ' + str(KC_price))
-                    Start[i] = 0
+                krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
+                current_price = get_current_price("KRW-"+coin_list[i])
+                target_price = get_target_price("KRW-"+coin_list[i])
+                KC_price = get_KC_price("KRW-"+coin_list[i])
+                dbgout("KRW-"+coin_list[i]+ ' current: ' + str(current_price))
+                dbgout("KRW-"+coin_list[i]+ ' target: ' + str(target_price))
+                dbgout("KRW-"+coin_list[i]+ ' %K: ' + str(KC_price))
+                Start[i] = 0
 
 
 class Thread1(threading.Thread):
@@ -143,8 +144,8 @@ class Thread1(threading.Thread):
                     if coin_balance is not None:
                         upbit.sell_market_order("KRW-"+coin_list[0], coin_balance)
                         time.sleep(1)
-                        krw[0] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[0]))
-                        dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' sell')
+                        SellBalance[0] = get_current_price("KRW-"+coin_list[0]) * coin_balance
+                        dbgout("KRW-"+coin_list[0]+': '+str(round(SellBalance[0],0))+'won'+' sell')
                     time.sleep(10)
                         
             except Exception as e:
@@ -178,10 +179,10 @@ class Thread2(threading.Thread):
                 else:
                     Start[1] = 1
                     if coin_balance is not None:
+                        SellBalance[1] = get_current_price("KRW-"+coin_list[1]) * coin_balance
                         upbit.sell_market_order("KRW-"+coin_list[1], coin_balance)
                         time.sleep(1)
-                        krw[1] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
-                        dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' sell')
+                        dbgout("KRW-"+coin_list[1]+': '+str(round(SellBalance[1],0))+'won'+' sell')
                     time.sleep(10)
 
             except Exception as e:
@@ -193,6 +194,7 @@ if __name__ == '__main__':
     coin_list = ["ETH", "BTC"]
     dbgout('auto trade start')
 
+    SellBalance = [None] * len(coin_list)
     krw = [None] * len(coin_list)
     Start = [None] * (len(coin_list))
 
