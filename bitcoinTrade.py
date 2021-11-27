@@ -198,7 +198,7 @@ if __name__ == '__main__':
 
     SellBalance = [None] * len(coin_list)
     krw = [None] * len(coin_list)
-    Start = [None] * (len(coin_list))
+    Start = [None] * len(coin_list)
 
     t0 = Thread0()
     t0.start()
