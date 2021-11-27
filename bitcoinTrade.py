@@ -108,7 +108,7 @@ class Thread0(threading.Thread):
         if Start[0] == 1:
             time.sleep(1)
             for i in range(len(coin_list)):
-                krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
+                krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[i]))
                 current_price = get_current_price("KRW-"+coin_list[i])
                 target_price = get_target_price("KRW-"+coin_list[i])
                 KC_price = get_KC_price("KRW-"+coin_list[i])
