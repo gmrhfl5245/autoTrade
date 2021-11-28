@@ -143,9 +143,12 @@ class Thread1(threading.Thread):
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            if krw[0] >= 5000 + (krw[0]*0.9995):
-                                dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' buy')
-                                upbit.buy_market_order("KRW-"+coin_list[0], krw[0]*0.9995)
+                            if get_KC_price < 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
+                                dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' market_buying')
+                                upbit.buy_market_order("KRW-"+coin_list[0], krw[1]*0.9995)
+                            if get_KC_price > 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
+                                dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' limit_buying')
+                                upbit.buy_limit_order("KRW-"+coin_list[0], target_price, krw[0]*0.9995)
 
                 else:
                     Start[0] = 1
@@ -180,9 +183,12 @@ class Thread2(threading.Thread):
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            if krw[1] >= 5000 + (krw[1]*0.9995):
-                                dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' buy')
+                            if get_KC_price < 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
+                                dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' market_buying')
                                 upbit.buy_market_order("KRW-"+coin_list[1], krw[1]*0.9995)
+                            if get_KC_price > 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
+                                dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' limit_buying')
+                                upbit.buy_limit_order("KRW-"+coin_list[1], target_price, krw[1]*0.9995)
 
                 else:
                     Start[1] = 1
@@ -198,7 +204,7 @@ class Thread2(threading.Thread):
                 time.sleep(1)
  
 
- 
+
 if __name__ == '__main__':
     
     dbgout('auto trade start')
@@ -207,7 +213,7 @@ if __name__ == '__main__':
 
     SellBalance = [None] * len(coin_list)
     krw = [None] * len(coin_list)
-    Start = [None] * len(coin_list)
+    Start = [1] * len(coin_list)
 
     t0 = Thread0()
     t0.start()
