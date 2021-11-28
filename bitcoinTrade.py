@@ -103,18 +103,26 @@ def get_KC_price(ticker):
 
     return target_price
 
+
 class Thread0(threading.Thread):
     def run(self) -> None:
-        if Start[0] == 1 and Start[1] == 1:
-            for i in range(len(coin_list)):
-                krw[i] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[i]))
-                current_price = get_current_price("KRW-"+coin_list[i])
-                target_price = get_target_price("KRW-"+coin_list[i])
-                KC_price = get_KC_price("KRW-"+coin_list[i])
-                dbgout("KRW-"+coin_list[i]+ ' current: ' + str(current_price))
-                dbgout("KRW-"+coin_list[i]+ ' target: ' + str(target_price))
-                dbgout("KRW-"+coin_list[i]+ ' %K: ' + str(KC_price))
-                Start[i] = 0
+        while True:
+            try:
+                if Start[0] == 1 and Start[1] == 1:
+                    for i in range(len(coin_list)):
+                        time.sleep(1)
+                        krw[i] = get_balance("KRW") / len(coin_list)
+                        current_price = get_current_price("KRW-"+coin_list[i])
+                        target_price = get_target_price("KRW-"+coin_list[i])
+                        KC_price = get_KC_price("KRW-"+coin_list[i])
+                        dbgout("KRW-"+coin_list[i]+ ' balance: '+ str( round(krw[i],0) ) + 'won')
+                        dbgout("KRW-"+coin_list[i]+ ' current: ' + str(current_price))
+                        dbgout("KRW-"+coin_list[i]+ ' target: ' + str(target_price))
+                        dbgout("KRW-"+coin_list[i]+ ' %K: ' + str(KC_price))
+                        Start[i] = 0
+
+            except Exception as e:
+                dbgout(str(e))
                 time.sleep(1)
 
 
@@ -135,7 +143,6 @@ class Thread1(threading.Thread):
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            krw[0] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[0]))
                             if krw[0] >= 5000 + (krw[0]*0.9995):
                                 dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' buy')
                                 upbit.buy_market_order("KRW-"+coin_list[0], krw[0]*0.9995)
@@ -173,7 +180,6 @@ class Thread2(threading.Thread):
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            krw[1] = get_balance("KRW") / (len(coin_list) - coin_list.index(coin_list[1]))
                             if krw[1] >= 5000 + (krw[1]*0.9995):
                                 dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' buy')
                                 upbit.buy_market_order("KRW-"+coin_list[1], krw[1]*0.9995)
@@ -190,11 +196,14 @@ class Thread2(threading.Thread):
             except Exception as e:
                 dbgout(str(e))
                 time.sleep(1)
+ 
 
+ 
 if __name__ == '__main__':
+    
+    dbgout('auto trade start')
 
     coin_list = ["ETH", "BTC"]
-    dbgout('auto trade start')
 
     SellBalance = [None] * len(coin_list)
     krw = [None] * len(coin_list)
