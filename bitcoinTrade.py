@@ -139,14 +139,15 @@ class Thread1(threading.Thread):
                 if start_time <= now <= end_time - timedelta(seconds=10):
                     current_price = get_current_price("KRW-"+coin_list[0])
                     target_price = get_target_price("KRW-"+coin_list[0])
+                    target_KC = get_KC_price("KRW-"+coin_list[0])
 
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            if get_KC_price < 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
+                            if target_KC < 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
                                 dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' market_buying')
                                 upbit.buy_market_order("KRW-"+coin_list[0], krw[1]*0.9995)
-                            if get_KC_price > 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
+                            if target_KC > 0.8 and krw[0] >= 5000 + (krw[0]*0.9995):
                                 dbgout("KRW-"+coin_list[0]+': '+str(round(krw[0],0))+'won'+' limit_buying')
                                 upbit.buy_limit_order("KRW-"+coin_list[0], target_price, krw[0]*0.9995)
 
@@ -179,14 +180,15 @@ class Thread2(threading.Thread):
                 if start_time <= now <= end_time - timedelta(seconds=10):
                     current_price = get_current_price("KRW-"+coin_list[1])
                     target_price = get_target_price("KRW-"+coin_list[1])
+                    target_KC = get_KC_price("KRW-"+coin_list[1])
 
                     if target_price <= current_price:
                         
                         if coin_balance is None:
-                            if get_KC_price < 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
+                            if target_KC < 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
                                 dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' market_buying')
                                 upbit.buy_market_order("KRW-"+coin_list[1], krw[1]*0.9995)
-                            if get_KC_price > 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
+                            if target_KC > 0.8 and krw[1] >= 5000 + (krw[1]*0.9995):
                                 dbgout("KRW-"+coin_list[1]+': '+str(round(krw[1],0))+'won'+' limit_buying')
                                 upbit.buy_limit_order("KRW-"+coin_list[1], target_price, krw[1]*0.9995)
 
