@@ -1,5 +1,17 @@
 (설치)
 
+[윈도우]
+pip로 pyupbit 설치
+pip install pyupbit
+
+pip로 numpy 설치
+pip install numpy
+
+pip로 slacker 설치
+pip install slacker
+
+
+[리눅스]
 패키지 목록 업데이트
 sudo apt update
 
